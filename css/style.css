@@ -14,10 +14,7 @@ h2 {
 .navbar-brand img {
   border-radius: 4px;
 }
-.admin-only {
-  /* hide by default, JS will show if role=admin */
-  display: none;
-}
+
 .table-primary {
   cursor: pointer;
 }

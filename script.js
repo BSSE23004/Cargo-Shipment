@@ -9,17 +9,11 @@ if (
   location.href = "login.html";
 }
 
-// Show admin-only elements if role=admin
-if (localStorage.getItem("role") === "admin") {
-  document
-    .querySelectorAll(".admin-only")
-    .forEach((el) => (el.style.display = "block"));
-}
-
 // ---- Common Functions ----
 function saveAll() {
   localStorage.setItem("shipments", JSON.stringify(allShipments));
 }
+
 function updateDashboard() {
   const total = allShipments.length;
   const delivered = allShipments.filter((s) => s.status === "Delivered").length;
@@ -45,8 +39,8 @@ function renderChart() {
   });
 }
 
-// ---- Index Page ----
-if (location.pathname.endsWith("index.html") || location.pathname === "/") {
+// ---- home Page ----
+if (location.pathname.endsWith("home.html") || location.pathname === "/") {
   renderChart();
 }
 
@@ -60,7 +54,7 @@ if (location.pathname.endsWith("list.html")) {
       tr.innerHTML = `
         <td>${s.id}</td><td>${s.sender}</td><td>${s.receiver}</td>
         <td>${s.destination}</td><td>${s.weight}</td><td>${s.status}</td>
-        <td class="admin-only">
+        <td class="">
           <button class="btn btn-sm btn-info" data-edit="${idx}">Edit</button>
           <button class="btn btn-sm btn-danger" data-delete="${idx}">Delete</button>
         </td>`;
