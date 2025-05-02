@@ -2,75 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Cargo-Shipment</title>
+    <title>Login</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon" />
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="index.html">
-          <img
-            src="images/logo.png"
-            alt="Logo"
-            width="30"
-            height="30"
-            class="d-inline-block align-text-top me-2"
-          />
-          Cargo Shipment System
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="add.html">Add Record</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="list.html">View Records</a>
-            </li>
-          </ul>
-        </div>
+  <body class="d-flex align-items-center justify-content-center vh-100">
+    <form id="loginForm" class="p-4 border rounded bg-white">
+      <h3 class="mb-3 text-center">Please Sign In</h3>
+      <div class="mb-3">
+        <input
+          type="text"
+          id="user"
+          class="form-control"
+          placeholder="Username"
+          required
+        />
       </div>
-    </nav>
-    <div class="container mt-5">
-      <div class="row text-center">
-        <h1>Welcome to the Cargo Shipment & Freight Management System</h1>
-        <p class="lead">Efficiently track, manage, and view your shipments</p>
+      <div class="mb-3">
+        <input
+          type="password"
+          id="pass"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
       </div>
-      <div class="row mt-4 justify-content-center">
-        <div class="col-md-4">
-          <div class="card text-center shadow">
-            <div class="card-body">
-              <h5 class="card-title">Add New Shipment</h5>
-              <a href="add.html" class="btn btn-primary">Go to Add</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center shadow">
-            <div class="card-body">
-              <h5 class="card-title">View All Shipments</h5>
-              <a href="list.html" class="btn btn-success">Go to List</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <button class="btn btn-primary w-100" type="submit">Login</button>
+    </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Simple hard-coded creds
+      const CREDS = { user: "admin", pass: "1234", role: "admin" };
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (user.value === CREDS.user && pass.value === CREDS.pass) {
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("role", CREDS.role);
+          location.href = "home.html";
+        } else {
+          alert("Invalid credentials");
+        }
+      });
+    </script>
   </body>
 </html>

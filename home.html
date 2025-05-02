@@ -2,16 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Add / Edit Shipment</title>
+    <title>Cargo Shipment Dashboard</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon" />
+    <style>
+      .metrics-container {
+        flex-wrap: wrap;
+        padding: 1rem;
+      }
+
+      .metric-card {
+        flex: 1 1 200px;
+        max-width: 250px;
+        background: linear-gradient(145deg, #e0e0e0, #ffffff);
+        border-radius: 20px; /* smooth corners */
+        box-shadow: 8px 8px 16px #bebebe,
+          /* dark shadow */ -8px -8px 16px #ffffff; /* light shadow */
+        text-align: center;
+        padding: 2rem 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .metric-card h5 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: #333;
+      }
+
+      .metric-card p {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #007bff;
+        margin: 0;
+      }
+
+      .metric-card:hover {
+        transform: translateY(-8px); /* lift effect */
+        box-shadow: 12px 12px 24px #b3b3b3, -12px -12px 24px #ffffff;
+      }
+    </style>
   </head>
   <body>
-    <!-- Navbar -->
+    <!-- Navbar (shared across pages) -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="home.html">
@@ -47,61 +83,32 @@
         </div>
       </div>
     </nav>
+
     <div class="container mt-5">
-      <h2 id="formTitle" class="text-center mb-4">Add New Cargo Shipment</h2>
-      <form id="shipmentForm">
-        <div class="mb-3">
-          <label for="shipmentId" class="form-label">Shipment ID</label>
-          <input type="text" id="shipmentId" class="form-control" required />
+      <!-- Metrics -->
+      <div class="metrics-container d-flex justify-content-center gap-4">
+        <div class="metric-card">
+          <h5>Total Shipments</h5>
+          <p id="totalCount">0</p>
         </div>
-        <div class="mb-3">
-          <label for="sender" class="form-label">Sender Email</label>
-          <input type="email" id="sender" class="form-control" required />
+        <div class="metric-card">
+          <h5>Delivered</h5>
+          <p id="deliveredCount">0</p>
         </div>
-        <div class="mb-3">
-          <label for="receiver" class="form-label">Receiver Name</label>
-          <input type="text" id="receiver" class="form-control" required />
+        <div class="metric-card">
+          <h5>In Transit</h5>
+          <p id="inTransitCount">0</p>
         </div>
-        <div class="mb-3">
-          <label for="destination" class="form-label">Destination</label>
-          <input
-            list="destList"
-            id="destination"
-            class="form-control"
-            autocomplete="off"
-            required
-          />
-          <datalist id="destList">
-            <option value="New York"></option>
-            <option value="London"></option>
-            <option value="Shanghai"></option>
-          </datalist>
+      </div>
+
+      <!-- Chart -->
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <canvas id="statusChart"></canvas>
         </div>
-        <div class="mb-3">
-          <label for="weight" class="form-label">Cargo Weight (kg)</label>
-          <input
-            type="number"
-            id="weight"
-            class="form-control"
-            min="1"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="status" class="form-label">Status</label>
-          <select id="status" class="form-select">
-            <option value="In Transit">In Transit</option>
-            <option value="Delivered">Delivered</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary" id="saveBtn" disabled>
-          Save
-        </button>
-        <button type="button" class="btn btn-secondary" id="cancelBtn">
-          Cancel
-        </button>
-      </form>
+      </div>
     </div>
+
     <footer class="app-footer text-center text-white py-3">
       <div class="container">
         <small
@@ -110,6 +117,8 @@
         >
       </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>

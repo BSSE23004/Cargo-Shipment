@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(255, 244, 244);
+  background-color: #f8f9fa;
 }
 
 h1,
@@ -9,4 +9,37 @@ h2 {
 
 .card {
   border-radius: 12px;
+}
+
+.navbar-brand img {
+  border-radius: 4px;
+}
+.admin-only {
+  /* hide by default, JS will show if role=admin */
+  display: none;
+}
+.table-primary {
+  cursor: pointer;
+}
+
+.app-footer {
+  background: linear-gradient(135deg, #343a40 0%, #212529 100%);
+  font-size: 0.9rem;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.app-footer small {
+  color: #ced4da;
+}
+
+.app-footer a {
+  color: #adb5bd;
+  text-decoration: underline;
+}
+
+.app-footer a:hover {
+  color: #f8f9fa;
+  text-decoration: none;
 }
